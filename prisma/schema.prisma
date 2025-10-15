@@ -1,0 +1,487 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                       String                    @id @default(cuid())
+  name                     String
+  email                    String                    @unique
+  imageUrl                 String?
+  role                     String                    @default("USER")
+  password                 String
+  officeId                 String
+  office                   Office                    @relation(fields: [officeId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  dashboardPermission      DashboardPermission?
+  settingPermission        SettingPermission?
+  officePermission         OfficePermission?
+  userPermission           UserPermission?
+  sentMessagePermission    SentMessagePermission?
+  reciveMessagePermission  ReciveMessagePermission?
+  archiveMessagePermission ArchiveMessagePermission?
+  humanResourcePermission  HumanResourcePermission?
+  backUpPermission         BackUpPermission?
+  userAccessToken          UserAccessToken[]
+  userRefrechToken         UserRefrechToken[]
+  userLog                  UserLog[]
+  createdAt                DateTime                  @default(now())
+  updatedAt                DateTime                  @updatedAt
+
+  @@map("users")
+}
+
+model UserAccessToken {
+  id        String   @id @default(cuid())
+  sessionId String   @unique
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("userAccessToken")
+}
+
+model UserRefrechToken {
+  id        String   @id @default(cuid())
+  sessionId String   @unique
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("userRefrechToken")
+}
+
+model UserLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  officeId  String?
+  office    Office?  @relation(fields: [officeId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  activity  String
+  ipAdress  String?
+  device    String?
+  createdAt DateTime @default(now())
+
+  @@map("userLogs")
+}
+
+model Office {
+  id                      String                    @id @default(cuid())
+  name                    String                    @unique
+  email                   String                    @unique
+  imageUrl                String
+  password                String                    @unique
+  user                    User[]
+  userLog                 UserLog[]
+  sentMessage             SentMessage[]             @relation("sentMessage")
+  reciveMessage           SentMessage[]             @relation("reciveMessage")
+  sentReciveMessage       ReciveMessage[]           @relation("sentReciveMessage")
+  recivedReciveMessage    ReciveMessage[]           @relation("recivedReciveMessage")
+  sentMessageDelay        DelayMessage[]            @relation("sentDelay")
+  reciveMessageDelay      DelayMessage[]            @relation("reciveDelay")
+  sentArchive             SentArchive[]             @relation("sentArchive")
+  sentArchiveRecive       SentArchive[]             @relation("sentArchiveRecive")
+  reciveArchive           ReciveArchive[]           @relation("reciveArchive")
+  reciveArchiveSent       ReciveArchive[]           @relation("reciveArchiveSent")
+  typeMessage             TypeMessage[]
+  acadimicDepartment      AcadimicDepartment[]
+  administrativePosittion AdministrativePosittion[]
+  departmentArchive       DepartmentArchive[]
+  employee                Employee[]
+  document                Document[]
+  notification            Notification[]
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime                  @updatedAt
+
+  @@map("offices")
+}
+
+model SentMessage {
+  id             String   @id @default(cuid())
+  officeSentId   String
+  officeSent     Office   @relation("sentMessage", fields: [officeSentId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  officeReciveId String
+  officeRecive   Office   @relation("reciveMessage", fields: [officeReciveId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  sentName       String
+  typeMessage    String
+  subject        String
+  file           String
+  fileName       String
+  date           DateTime
+  notes          String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("sentMessages")
+}
+
+model ReciveMessage {
+  id             String   @id @default(cuid())
+  officeSentId   String
+  officeSent     Office   @relation("sentReciveMessage", fields: [officeSentId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  officeReciveId String
+  officeRecive   Office   @relation("recivedReciveMessage", fields: [officeReciveId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  sentName       String
+  subject        String
+  typeMessage    String
+  file           String
+  fileName       String
+  date           DateTime
+  notes          String?
+  isRead         Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("reciveMessages")
+}
+
+model Notification {
+  id             String   @id @default(cuid())
+  officeSent     String
+  userSent       String
+  officeReciveId String
+  officeRecive   Office   @relation(fields: [officeReciveId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  subject        String
+  messageId      String   @unique
+  isRead         Boolean  @default(false)
+  createdAt      DateTime @default(now())
+
+  @@map("notification")
+}
+
+model TypeMessage {
+  id        String   @id @default(cuid())
+  title     String
+  officeId  String
+  office    Office   @relation(fields: [officeId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("TypeMessages")
+}
+
+model DelayMessage {
+  id             String   @id @default(cuid())
+  officeSentId   String
+  officeSent     Office   @relation("sentDelay", fields: [officeSentId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  officeReciveId String
+  officeRecive   Office   @relation("reciveDelay", fields: [officeReciveId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  sentName       String
+  typeMessage    String
+  subject        String
+  file           String
+  fileName       String
+  date           DateTime
+  notes          String?
+  delayDate      DateTime
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("delayMessages")
+}
+
+model SentArchive {
+  id                 String            @id @default(cuid())
+  officeSentId       String
+  officeSent         Office            @relation("sentArchive", fields: [officeSentId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  officeReciveId     String
+  subject            String
+  officeRecive       Office            @relation("sentArchiveRecive", fields: [officeReciveId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  departmentArciveId String
+  departmentArcive   DepartmentArchive @relation(fields: [departmentArciveId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  typeMessage        String
+  sentName           String
+  file               String
+  fileName           String
+  date               DateTime
+  notes              String?
+  archiveDate        DateTime
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("sentArchive")
+}
+
+model ReciveArchive {
+  id                 String            @id @default(cuid())
+  officeSentId       String
+  officeSent         Office            @relation("reciveArchive", fields: [officeSentId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  officeReciveId     String
+  officeRecive       Office            @relation("reciveArchiveSent", fields: [officeReciveId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  departmentArciveId String
+  departmentArcive   DepartmentArchive @relation(fields: [departmentArciveId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  subject            String
+  typeMessage        String
+  sentName           String
+  file               String
+  fileName           String
+  date               DateTime
+  notes              String?
+  archiveDate        DateTime
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+
+  @@map("reciveArchive")
+}
+
+model DepartmentArchive {
+  id            String          @id @default(cuid())
+  title         String
+  officeId      String
+  office        Office          @relation(fields: [officeId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  sentArchive   SentArchive[]
+  reciveArchive ReciveArchive[]
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  @@map("departmentArchive")
+}
+
+model AcadimicDepartment {
+  id               String     @id @default(cuid())
+  title            String
+  officeId         String
+  office           Office     @relation(fields: [officeId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  employeeDepOne   Employee[] @relation("dep-one")
+  employeeDepTwo   Employee[] @relation("dep-two")
+  employeeDepThree Employee[] @relation("dep-three")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("acadimicDepartment")
+}
+
+model AdministrativePosittion {
+  id        String     @id @default(cuid())
+  title     String
+  officeId  String
+  office    Office     @relation(fields: [officeId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  employee  Employee[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  @@map("administrativePosittion")
+}
+
+model Employee {
+  id                         String                  @id @default(cuid())
+  name                       String                  @unique
+  sex                        String
+  qualification              String
+  academicDegree             String
+  academicTitle              String
+  academicRank               String
+  nationality                String
+  universiry                 String
+  address                    String
+  email                      String                  @unique
+  phone                      String                  @unique
+  file                       String
+  fileName                   String
+  joinDate                   DateTime
+  dateOfBrith                DateTime
+  placeResidence             String
+  faculity                   String
+  imageUrl                   String
+  notes                      String?
+  officeId                   String
+  office                     Office                  @relation(fields: [officeId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  acadimicDepartmentId       String
+  acadimicDepartment         AcadimicDepartment      @relation("dep-one", fields: [acadimicDepartmentId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  acadimicDepartmentSecondId String
+  acadimicDepartmentSecond   AcadimicDepartment      @relation("dep-two", fields: [acadimicDepartmentSecondId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  acadimicDepartmentThirdId  String
+  acadimicDepartmentThird    AcadimicDepartment      @relation("dep-three", fields: [acadimicDepartmentThirdId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  administrativeId           String
+  administrative             AdministrativePosittion @relation(fields: [administrativeId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  createdAt                  DateTime                @default(now())
+  updatedAt                  DateTime                @updatedAt
+
+  @@map("employee")
+}
+
+model Document {
+  id             String   @id @default(cuid())
+  collegeName    String
+  universityName String
+  officeName     String
+  imageUrl       String
+  officeId       String
+  office         Office   @relation(fields: [officeId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("document")
+}
+
+model DashboardPermission {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  user           User     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  officeId       String   
+  homeDisplay    Boolean  @default(false)
+  userLogDisplay Boolean  @default(false)
+  userLogDelete  Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("dashboardPermissions")
+}
+
+model SettingPermission {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  officeId        String   
+  officeDisplay   Boolean  @default(false)
+  officeUpdate    Boolean  @default(false)
+  userDisplay     Boolean  @default(false)
+  userUpdate      Boolean  @default(false)
+  documentDisplay Boolean  @default(false)
+  documentUpdate  Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("settingPermissions")
+}
+
+model OfficePermission {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  officeId      String   
+  officeDisplay Boolean  @default(false)
+  officeCreate  Boolean  @default(false)
+  officeUpdate  Boolean  @default(false)
+  officeDelete  Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@map("officePermissions")
+}
+
+model UserPermission {
+  id                    String   @id @default(cuid())
+  userId                String   @unique
+  user                  User     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  officeId              String   
+  userDisplay           Boolean  @default(false)
+  userCreate            Boolean  @default(false)
+  userUpdate            Boolean  @default(false)
+  userDelete            Boolean  @default(false)
+  userPermissionDisplay Boolean  @default(false)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@map("userPermissions")
+}
+
+model SentMessagePermission {
+  id                 String   @id @default(cuid())
+  userId             String   @unique
+  user               User     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  officeId           String  
+  typeMessageDisplay Boolean  @default(false)
+  typeMessageCreate  Boolean  @default(false)
+  typeMessageUpdate  Boolean  @default(false)
+  typeMessageDelete  Boolean  @default(false)
+  sentMessageDisplay Boolean  @default(false)
+  sentMessageCreate  Boolean  @default(false)
+  sentMessageView    Boolean  @default(false)
+  sentMessageDelete  Boolean  @default(false)
+  sentMessageArchive Boolean  @default(false)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("sentMessagePermissions")
+}
+
+model ReciveMessagePermission {
+  id                   String   @id @default(cuid())
+  userId               String   @unique
+  user                 User     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  officeId             String   
+  reciveMessageDisplay Boolean  @default(false)
+  reciveMessageView    Boolean  @default(false)
+  reciveMessageDelete  Boolean  @default(false)
+  reciveMessageArchive Boolean  @default(false)
+  reciveMessageTrDelay Boolean  @default(false)
+  notificationDisplay  Boolean  @default(false)
+  notificationRead     Boolean  @default(false)
+  delayMessageDisplay  Boolean  @default(false)
+  delayMessageView     Boolean  @default(false)
+  delayMessageDelete   Boolean  @default(false)
+  delayMessageArchive  Boolean  @default(false)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@map("reciveMessagePermissions")
+}
+
+model ArchiveMessagePermission {
+  id                          String   @id @default(cuid())
+  userId                      String   @unique
+  user                        User     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  officeId                    String   
+  departmentArchiveDisplay    Boolean  @default(false)
+  departmentArchiveCreate     Boolean  @default(false)
+  departmentArchiveUpdate     Boolean  @default(false)
+  departmentArchiveDelete     Boolean  @default(false)
+  ArchiveSentMessageDisplay   Boolean  @default(false)
+  ArchiveSentMessageView      Boolean  @default(false)
+  ArchiveSentMessageDelete    Boolean  @default(false)
+  ArchiveReciveMessageDisplay Boolean  @default(false)
+  ArchiveReciveMessageView    Boolean  @default(false)
+  ArchiveReciveMessageDelete  Boolean  @default(false)
+  createdAt                   DateTime @default(now())
+  updatedAt                   DateTime @updatedAt
+
+  @@map("archiveMessagePermission")
+}
+
+model HumanResourcePermission {
+  id                         String   @id @default(cuid())
+  userId                     String   @unique
+  user                       User     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  officeId                   String  
+  departmentAacademicDisplay Boolean  @default(false)
+  departmentAacademicCreate  Boolean  @default(false)
+  departmentAacademicUpdate  Boolean  @default(false)
+  departmentAacademicDelete  Boolean  @default(false)
+  adminstrativeDisplay       Boolean  @default(false)
+  adminstrativeCreate        Boolean  @default(false)
+  adminstrativeUpdate        Boolean  @default(false)
+  adminstrativeDelete        Boolean  @default(false)
+  employeeDisplay            Boolean  @default(false)
+  employeeCreate             Boolean  @default(false)
+  employeeUpdate             Boolean  @default(false)
+  employeeDelete             Boolean  @default(false)
+  employeePrint              Boolean  @default(false)
+  createdAt                  DateTime @default(now())
+  updatedAt                  DateTime @updatedAt
+
+  @@map("humanResourcePermission")
+}
+
+model BackUpPermission {
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  officeId          String   
+  takeBackupDisplay Boolean  @default(false)
+  takeBackupCreate  Boolean  @default(false)
+  restoreBackup     Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("backUpPermissions")
+}
