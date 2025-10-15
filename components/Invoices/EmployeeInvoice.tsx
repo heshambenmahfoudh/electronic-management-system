@@ -117,7 +117,7 @@ export default function EmployeeInvoice({
               </tr>
             </thead>
             <tbody className="m-auto">
-              {initialData?.map((item: Employee, id: number) => {
+              {initialData?.map((item: any, id: number) => {
                 return (
                   <tr
                     key={id}
