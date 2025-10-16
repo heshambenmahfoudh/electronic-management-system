@@ -205,11 +205,13 @@ export default function Sidebar() {
           <h2 className="font-medium text-[16px] w-2/3 capitalize">
             {user?.office?.name}
           </h2>
-          <div>
+          <div   className="bg-blue-50 text-full text-center  w-10
+        h-10 border-1 font-medium  justify-center items-center
+        border-neutral-500   rounded-[50%] flex">
             {user?.imageUrl ? (
               <img
                 src={user?.office?.imageUrl}
-                className="rounded-[50%] w-12 h-12"
+                className="rounded-[50%]  "
                 alt="imageUrl"
               />
             ) : (
