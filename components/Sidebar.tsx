@@ -208,7 +208,7 @@ export default function Sidebar() {
           <div>
             {user?.imageUrl ? (
               <img
-                src={user?.imageUrl}
+                src={user?.office?.imageUrl}
                 className="rounded-[50%] w-12 h-12"
                 alt="imageUrl"
               />
