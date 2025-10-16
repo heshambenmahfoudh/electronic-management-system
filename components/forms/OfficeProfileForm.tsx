@@ -11,7 +11,7 @@ import { Office, SettingPermission } from '@prisma/client'
 import { useStateContext } from '@/contexts/ContextProvider'
 import { makePostRequestImageUrl } from '@/lib/apiRequest'
 import { getServerUser } from '@/actions/auth'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 export default function OfficeProfileForm({
   initialData,
   permission,
@@ -49,12 +49,14 @@ export default function OfficeProfileForm({
     }
   }
   const id = user?.office?.id
+  const query = useQueryClient()
   async function onSubmit(data: Office) {
     try {
       setIsLoading(true)
       data.imageUrl = imageUrl ?? ''
       const updatedOffice = await updateOfficeProfile(data, id!)
       if (updatedOffice?.status === 200) {
+         query.invalidateQueries({ queryKey: ['userSession'] })
         setIsLoading(false)
         toast.success('Office Profile Updated successfully')
       } else {

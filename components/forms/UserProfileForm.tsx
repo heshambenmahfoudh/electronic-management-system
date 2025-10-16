@@ -49,7 +49,7 @@ export default function UserProfileForm({
       const updatedUser = await updateUserProfile(data, id)
       if (updatedUser?.status === 200) {
         setIsLoading(false)
-        query.invalidateQueries({ queryKey: ['userSesstion'] })
+        query.invalidateQueries({ queryKey: ['userSession'] })
         toast.success('User Profile Updated successfully')
       } else {
         setIsLoading(false)
