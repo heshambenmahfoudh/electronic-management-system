@@ -43,9 +43,9 @@ export default function UserProfileForm({
   const id = permission?.userId
   const query = useQueryClient()
   async function onSubmit(data: User) {
-    setIsLoading(true)
-    data.imageUrl = imageUrl ?? ''
     try {
+      setIsLoading(true)
+      data.imageUrl = imageUrl ?? ''
       const updatedUser = await updateUserProfile(data, id)
       if (updatedUser?.status === 200) {
         setIsLoading(false)

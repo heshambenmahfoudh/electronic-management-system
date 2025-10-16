@@ -20,9 +20,6 @@ export default function EmployeesData({
   permission: HumanResourcePermission
 }) {
   const printReference = useRef<HTMLDivElement>(null)
-  // setIsLoadingPrint(true)
-
-  const [isLoadingPrint, setIsLoadingPrint] = useState(false)
   const handlePrint = useReactToPrint({
     contentRef: printReference as any,
   })

@@ -87,13 +87,13 @@ export default function NotificationData() {
                     A Persion named {capitlaiseLetter(item?.userSent)} send a
                     message with a subject - {item?.subject}
                   </span>
-                  <div className="flex justify-between  mt-2">
-                    <span className="text-[14px]  text-neutral-500">
+                  <div className="flex justify-between  ">
+                    <span className="text-[13px]  text-neutral-500">
                       {formatDistanceToNow(new Date(item?.createdAt), {
                         addSuffix: true,
                       })}
                     </span>
-                    <span className="text-[14px] font-medium">
+                    <span className="text-[13px] font-medium">
                       Mark as read
                     </span>
                   </div>

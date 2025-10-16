@@ -70,11 +70,11 @@ export default function ArchiveReciveMessageForm({
   const isDelay = watch('delay')
 
   async function onSubmit(data: TypeArchiveAndDelayProps) {
-    setIsLoading(true)
-    data.departmentArciveId = data?.archiveTo ?? ''
-    data.id = initialData?.id
-
+    
     try {
+      setIsLoading(true)
+      data.departmentArciveId = data?.archiveTo ?? ''
+      data.id = initialData?.id
       const response = isDelay
         ? await createNewDelayMessage(data)
         : await createNewReciveArchive(data)

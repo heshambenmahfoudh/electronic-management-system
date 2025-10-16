@@ -5,7 +5,6 @@ import TextInput from '../FormInputs/TextInput'
 import { useForm } from 'react-hook-form'
 import ButtonClose from '../ButtonClose'
 import FormHeader from '../Headers/FormHeader'
-// import { DepartmentArchive } from '@/types/types'
 import toast from 'react-hot-toast'
 import {
   createNewDepartmentArchive,
@@ -45,9 +44,9 @@ export default function DepartmentArchiveForm({
       try {
         const updated = await updateDepartmentArchiveById(data, isUpdate)
         if (updated?.status === 200) {
+          router.push('/dashboard/archive/archive-department')
           reset()
           setIsLoading(false)
-          router.push('/dashboard/archive/archive-department')
           toast.success('Department archive updated successfully')
         } else {
           setIsLoading(false)
@@ -60,9 +59,9 @@ export default function DepartmentArchiveForm({
       try {
         const createNew = await createNewDepartmentArchive(data)
         if (createNew?.status === 200) {
+          router.push('/dashboard/archive/archive-department')
           reset()
           setIsLoading(false)
-          router.push('/dashboard/archive/archive-department')
           toast.success('New Department archive created successfully')
         } else {
           setIsLoading(false)

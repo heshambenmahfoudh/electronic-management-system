@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react'
 import SelectInput from './FormInputs/SelectInput'
 import { FormOptionsDataType } from '@/types/types'
 import { useForm } from 'react-hook-form'
-import useUser from '@/hooks/useUser'
 import { getDepartmentArchives } from '@/actions/departmentArchive'
 import { useRouter } from 'next/navigation'
-import { useSession } from '@/store/auth'
+import { useQuery } from '@tanstack/react-query'
+import { getServerUser } from '@/actions/auth'
 type SearchFormProps = {
   department: string
 }
@@ -15,11 +15,14 @@ export default function SearchByDepartment({ page }: { page: string }) {
     departmentOptions: [],
   })
   const {
-    register,
+    control,
     watch,
     formState: { errors },
   } = useForm<SearchFormProps>()
-  const { user } = useSession()
+const { data: user } = useQuery({
+    queryKey: ['userSession'],
+    queryFn: getServerUser,
+  })
     const officeId = user?.office?.id
   const department = watch('department')
   console.log(department)
@@ -58,7 +61,7 @@ export default function SearchByDepartment({ page }: { page: string }) {
     <div className="my-1.5 -mb-2.5 md:mx-5 sm:mx-4 mx-3">
       <SelectInput
         name="department"
-        register={register}
+        control={control}
         className="md:w-1/3 w-full"
         options={formOptionsData?.departmentOptions}
         option="Department"

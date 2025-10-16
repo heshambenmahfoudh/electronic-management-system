@@ -9,8 +9,6 @@ import FormHeader from '../Headers/FormHeader'
 import { Document, SettingPermission } from '@prisma/client'
 import { useStateContext } from '@/contexts/ContextProvider'
 import { makePostRequestImageUrl } from '@/lib/apiRequest'
-import { getServerUser } from '@/actions/auth'
-import { useQuery } from '@tanstack/react-query'
 import { updateDocumentDataById } from '@/actions/documents'
 export default function DocumentDataForm({
   initialData,
@@ -30,10 +28,7 @@ export default function DocumentDataForm({
     defaultValues: initialData,
   })
 
-  const { data: user } = useQuery({
-    queryKey: ['userSession'],
-    queryFn: getServerUser,
-  })
+ 
   async function changeImageUrl(e: ChangeEvent<HTMLInputElement>) {
     const result = await makePostRequestImageUrl(e, setIsLoadingImageUrl)
     if (result?.status === 200) {
@@ -44,7 +39,7 @@ export default function DocumentDataForm({
       toast.error('Failed to Upload imageUrl')
     }
   }
-  const id = user?.office?.id
+
   async function onSubmit(data: Document) {
     try {
       setIsLoading(true)

@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
-import React, { forwardRef, useCallback, useState } from 'react'
 import html2canvas from 'html2canvas'
 import { Download, Printer } from 'lucide-react'
 import { useReactToPrint } from 'react-to-print'
 import jsPDF from 'jspdf'
-import toast from 'react-hot-toast'
 import { Employee } from '@prisma/client'
 
 export default function InvoiceButton({

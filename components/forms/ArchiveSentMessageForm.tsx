@@ -59,10 +59,10 @@ export default function ArchiveSentMessageForm({
   }))
 
   async function onSubmit(data: TypeArchiveAndDelayProps) {
-    setIsLoading(true)
-    data.departmentArciveId = data?.archiveTo ?? ''
-    data.id = initialData?.id
     try {
+      setIsLoading(true)
+      data.departmentArciveId = data?.archiveTo ?? ''
+      data.id = initialData?.id
       const response = await createNewSentArchive(data)
 
       if (response?.status === 200) {

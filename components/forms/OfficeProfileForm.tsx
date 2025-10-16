@@ -61,7 +61,10 @@ export default function OfficeProfileForm({
         setIsLoading(false)
         toast.error(updatedOffice?.error)
       }
-    } catch {}
+    } catch(error) {
+      setIsLoading(false)
+
+    }
   }
 
   return (

@@ -2,7 +2,6 @@
 'use client'
 import InvoiceHeader from './InvoiceHeader'
 import InvoiceFooter from './InvoiceFooter'
-import { Employee } from '@prisma/client'
 export default function EmployeeInvoice({
   initialData,
   ref,

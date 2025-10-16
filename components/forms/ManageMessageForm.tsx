@@ -79,14 +79,14 @@ export default function ManageMessageForm() {
   }))
   const query = useQueryClient()
   async function onSubmit(data: TypeManageMessageFormProps) {
-    setIsLoading(true)
-    const officeSentId = officeId
-    const officeReciveId = data?.sentToOffice
-    data.officeSentId = officeSentId as string
-    data.officeReciveId = officeReciveId as string
-    data.file = file
-    data.fileName = fileName
     try {
+      setIsLoading(true)
+      const officeSentId = officeId
+      const officeReciveId = data?.sentToOffice
+      data.officeSentId = officeSentId as string
+      data.officeReciveId = officeReciveId as string
+      data.file = file
+      data.fileName = fileName
       const newMessage = await createNewSentMessage(data)
       if (newMessage?.status === 200) {
         router.push('/dashboard/sent-messages/management-messages')

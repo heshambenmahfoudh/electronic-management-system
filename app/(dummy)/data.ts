@@ -333,19 +333,19 @@ export const employeeColumn = [
 
 export const carouselItems = [
   {
-    image: '/images/carousel-1.jpg',
+    image: '/images/carousel1.jpg',
     title: 'Electronic management system',
     subtitle:
       'An integrated platform for managing messages',
   },
   {
-    image: '/images/carousel-2.jpg',
+    image: '/images/carousel2.jpg',
     title: 'Electronic Correspondence and archiving',
     subtitle:
       'A digital solution for tracking academic messages',
   },
   {
-    image: '/images/carousel-3.jpg',
+    image: '/images/carousel3.jpg',
     title: 'Academic and Correspondence management',
     subtitle: 'Organize archive, and exchange documents efficietly',
   },
