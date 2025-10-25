@@ -250,13 +250,7 @@ export async function getOffices(id?: string) {
   }
 }
 
-/*
-
-
-FUNCTIONS
-
-
-*/
+/*FUNCTIONS*/
 
 async function checkOfficeValue(formData: Office) {
   const { name, email, imageUrl } = formData

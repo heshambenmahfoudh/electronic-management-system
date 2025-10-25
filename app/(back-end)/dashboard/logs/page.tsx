@@ -10,6 +10,7 @@ export default async function logs() {
     redirect('/login')
   }
   const officeId = session?.office?.id
+  
   const data = (await getUserLogs(officeId!))?.data || []
   const permission = (await getDashboardPermissionById(session?.id))?.data 
 

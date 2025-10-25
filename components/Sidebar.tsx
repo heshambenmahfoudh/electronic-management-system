@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 'use client'
 import { getArchiveMessagePermissionById } from '@/actions/permissions/archiveMessagePermissions'
@@ -593,7 +591,7 @@ export default function Sidebar() {
         <button
           onClick={handleLogout}
           type="button"
-          className="flex justify-center items-center gap-4 mt-2
+          className="flex justify-center items-center gap-4 mt-2 absolute bottom-0.5
         cursor-pointer md:text-16  p-2  mb-2.5 sm:text-14 
          rounded-lg bg-black/90 w-full text-white capitalize
           font-medium"

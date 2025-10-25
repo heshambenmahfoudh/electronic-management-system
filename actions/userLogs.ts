@@ -70,7 +70,7 @@ export async function getUserLogs(officeId: string) {
     )
 
     return {
-      data: usersLogs,
+      data: {logs:usersLogs,length:usersLogsData?.length},
       status: 200,
       error: null,
     }

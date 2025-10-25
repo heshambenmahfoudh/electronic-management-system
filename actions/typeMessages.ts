@@ -178,13 +178,7 @@ export async function getTypeMessages(officeId: string | undefined) {
   }
 }
 
-/*
-
-
-FUNCTIONS
-
-
-*/
+/*FUNCTIONS*/
 
 async function checkTypeMessageValue(formData: TypeMessage) {
   const { title, officeId } = formData

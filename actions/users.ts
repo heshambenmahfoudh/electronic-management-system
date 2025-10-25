@@ -315,15 +315,13 @@ async function checkUserValue(formData: User) {
 }
 
 async function createUserPermission(userId: string, officeId: string) {
-  console.log('userrrrrrrrrrrr', userId)
   try {
-    const dd = await db.dashboardPermission.create({
+    await db.dashboardPermission.create({
       data: {
         userId,
         officeId,
       },
     })
-    console.log('userrrrrrrrrrrr', dd)
     await db.settingPermission.create({
       data: {
         userId,

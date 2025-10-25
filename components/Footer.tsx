@@ -11,7 +11,7 @@ export default function Footer() {
         >
           Electronic Management System
         </Link>
-        <p className="my-6 w-[740px] mx-auto text-gray-500 dark:text-gray-400">
+        <p className="my-6 md:w-[740px] w-fit mx-auto text-gray-500 dark:text-gray-400">
           Electronic Management that connects multiple offices, allowing
           seamless exchange between them.The system also features powerfull
           message archivivg.This was was made By Hisham Mahfoudh

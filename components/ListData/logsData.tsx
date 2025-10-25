@@ -19,16 +19,16 @@ export default function LogsData({
   const {
     register,
     watch,
-    formState: { errors },
-  } = useForm() 
+    
+  } = useForm()
 
   const search = watch('search')
   const fromDate = watch('fromDate')
   const toDate = watch('toDate')
   const newData = useMemo(() => {
     return (
-      data?.length > 0 &&
-      data?.filter((item: any) => {
+      data?.logs?.length > 0 &&
+      data?.logs?.filter((item: any) => {
         const searchValue =
           search === '' ||
           Object.values(spliteObject(item))
@@ -49,10 +49,9 @@ export default function LogsData({
       <FixedHeader
         linkUrl="/dashboard/users/new"
         textValue="User Logs"
-         numberData={newData?.length | 0}
+        numberData={data?.length | 0}
         isHidden={true}
       />
-
       <div className=" overflow-auto md:mt-6 mt-4  md:mx-5 mx-3 ">
         {data?.length > 0 && (
           <div
@@ -88,11 +87,7 @@ export default function LogsData({
         <div
           className={` bg-gray-300 px-4 pb-4 rounded-xl overflow-auto
       shadow-md  md:mx-5 mx-3 
-      ${
-        newData?.length > 2 || newData?.[0]?.userLogs?.length > 2
-          ? 'h-[400px]   '
-          : 'h-fit'
-      } `}
+      ${data?.length > 2 ? 'h-[400px]   ' : 'h-fit'} `}
         >
           {newData?.length > 0 ? (
             newData?.map((item: any) => (

@@ -77,7 +77,7 @@ export default function SentMessagesArchiveData({
         isHidden={true}
       />
 
-      <div className="md:mt-6 mt-4  md:mx-5 mx-3   ">
+      <div className="md:mt-6 mt-4 md:mx-5 mx-3">
         {data?.length > 0 && (
           <div
             className="grid gap-x-2 md:gap-y-4 gap-y-0.1 

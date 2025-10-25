@@ -41,6 +41,7 @@ export async function createNewDocument() {
     }
   }
 }
+
 export async function updateDocumentDataById(formData: Document, id: string) {
   const {
     imageUrl,

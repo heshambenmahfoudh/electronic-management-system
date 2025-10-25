@@ -289,6 +289,12 @@ export async function logoutUser() {
     cookieStore.delete({ name: 'accessToken', path: '/' })
     cookieStore.delete({ name: 'refrechToken', path: '/' })
     cookieStore.delete({ name: 'token', path: '/' })
+    const userLog = {
+      userId: session?.id,
+      officeId: session?.office?.id,
+      activity: `User (${session?.name}) Logged out Successfully`,
+    }
+    await createNewUserLog(userLog)
     return {
       message: 'User session Deleted successfully',
       status: 200,

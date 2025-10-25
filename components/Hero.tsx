@@ -4,17 +4,18 @@ import ThemeLink from './ThemLink'
 export default function Hero() {
   return (
     <div className=" bg-gradient-to-b from-gray-900 flex flex-col py-14 md:py-32 px-4 md:px-16 text-slate-50 items-center gap-6">
-      <div className="flex flex-col sm:space-y-8 space-y-6  items-center max-w-4xl mx-auto text-center ">
-        <h2 className="text-2xl md:text-4xl font-bold md:mt-14 mt-10 ">
+      <div className="flex flex-col sm:space-y-8 space-y-6  items-center
+       md:max-w-4xl w-full mx-auto text-center ">
+        <h2 className="text-xl md:text-4xl font-bold md:mt-14 mt-10 ">
           Electronic management software for Management Messages.
         </h2>
-        <p className="text-base md:text-xl">
+        <p className="text-base md:text-xl text-[15px]">
           Electronic Management that connects multiple offices, allowing
           seamless exchange between them.The system also features powerfull
           message archivivg.
         </p>
         <div
-          className="py-4 flex space-x-4 items-center 
+          className="py-4 flex md:space-x-4 gap-2.5 items-center 
         flex-wrap  justify-center"
         >
           <>
