@@ -219,8 +219,8 @@ export default function ArchiveReciveMessageForm({
               isLoading={isLoading}
               loadingTitle={
                 isDelay
-                  ? 'Delayed message please wait...'
-                  : 'Archived message please wait...'
+                  ? 'Delayed message ...'
+                  : 'Archived message ...'
               }
             />
             <ButtonClose hrefUrl="/dashboard/recive-messages" />

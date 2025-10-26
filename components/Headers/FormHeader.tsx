@@ -16,9 +16,9 @@ export default function FormHeader({
   return (
     <div
       className="flex justify-between items-center 
-    bg-white h-[60px] px-8 sticky top-[60px] shadow-sm z-10"
+    bg-white h-[60px] md:px-8 px-4 sticky top-[60px] shadow-sm z-10"
     >
-      <h2 className="capitalize text-20 font-semibold text-black ">
+      <h2 className="capitalize md:text-[16px] text-[14px] font-semibold text-black ">
         {titleValue}
       </h2>
       {!isHidden && (
@@ -27,7 +27,7 @@ export default function FormHeader({
           className="text-20 p-2
          bg-black/90  text-white rounded-full"
         >
-          <X className="w-5 h-5" />
+          <X className="w-4 h-4 md:w-5 md:h-5" />
         </Link>
       )}
     </div>

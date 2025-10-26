@@ -53,7 +53,8 @@ export default function NotificationData() {
           />
         </div>
 
-        <div className="h-[540px] overflow-y-auto mt-5 flex flex-col items-center gap-5">
+        <div className="h-[540px] overflow-y-auto mt-5 flex flex-col
+         items-center gap-2">
           {notificationData?.data?.length || 0 > 0 ? (
             notificationData?.data?.map((item: Notification) => (
               <Link
@@ -70,7 +71,8 @@ export default function NotificationData() {
                     : `/dashboard/recive-messages/view/${item?.messageId}`
                 }
                 key={item?.id}
-                className={`flex justify-between  min-w-full hover:bg-gray-100 px-3 py-4
+                className={`flex justify-between  min-w-full hover:bg-gray-100 
+                  px-3 md:py-5 py-3
                      rounded-md gap-x-3 ${
                        !permission?.data?.notificationRead &&
                        'cursor-not-allowed'
@@ -83,11 +85,11 @@ export default function NotificationData() {
                   <h2 className="text-[15px] font-medium">
                     New Message from {item?.officeSent}
                   </h2>
-                  <span className="text-[14px] text-neutral-500">
+                  <span className="text-[13px] text-neutral-500">
                     A Persion named {capitlaiseLetter(item?.userSent)} send a
                     message with a subject - {item?.subject}
                   </span>
-                  <div className="flex justify-between  ">
+                  <div className="flex justify-between mt-1 ">
                     <span className="text-[13px]  text-neutral-500">
                       {formatDistanceToNow(new Date(item?.createdAt), {
                         addSuffix: true,

@@ -98,14 +98,14 @@ export default function AdministrativepositionsForm({
           <SubmitButton
             title={
               isUpdate
-                ? 'Update administrative position'
-                : 'Save new administrative position'
+                ? 'Update administrative'
+                : 'Save new administrative'
             }
             isLoading={isLoading}
             loadingTitle={
               isUpdate
-                ? 'Updating administrative position please wait...'
-                : 'Saving administrative position please wait...'
+                ? 'Updating administrative ...'
+                : 'Saving administrative ...'
             }
           />
           <ButtonClose hrefUrl="/dashboard/human-resources/administrative-positions" />

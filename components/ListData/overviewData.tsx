@@ -28,7 +28,7 @@ export default async function OverviewData({
           <User className="w-5 h-5 text-blue!" />
         </div>
         <div>
-          <span className="mr-1 font-medium text-white capitalize text-[18px]">
+          <span className="mr-1 font-medium text-white capitalize md:text-[17px] text-[15px]">
             {' '}
             Welcome back ,{session?.name}!
           </span>{' '}

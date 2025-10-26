@@ -356,7 +356,7 @@ export default function EmployeeForm({
             title={isUpdate ? 'Update employee' : 'Save new employee'}
             isLoading={isLoading}
             loadingTitle={
-              isUpdate ? 'Updating please wait...' : 'Saving please wait...'
+              isUpdate ? 'Updating employee ...' : 'Saving employee ...'
             }
           />
           <ButtonClose hrefUrl="/dashboard/human-resources/employees" />

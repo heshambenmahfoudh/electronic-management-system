@@ -107,7 +107,7 @@ export default function UserProfileForm({
             <SubmitButton
               title="Update profile"
               isLoading={isLoading}
-              loadingTitle="Updating please wait..."
+              loadingTitle="Updating profile ..."
             />
           </div>
         )}

@@ -186,7 +186,7 @@ export default function ReciveMessagePermissionForm() {
           <SubmitButton
             title="Update permission"
             isLoading={isLoading}
-            loadingTitle="Updating permission please wait..."
+            loadingTitle="Updating permission ..."
           />
         </div>
       </form>

@@ -144,7 +144,7 @@ export default function UserPermissionForm() {
           <SubmitButton
             title="Update permission"
             isLoading={isLoading}
-            loadingTitle="Updating permission please wait..."
+            loadingTitle="Updating permission ..."
           />
         </div>
       </form>

@@ -87,7 +87,7 @@ export default function LogsData({
         <div
           className={` bg-gray-300 px-4 pb-4 rounded-xl overflow-auto
       shadow-md  md:mx-5 mx-3 
-      ${data?.length > 2 ? 'h-[400px]   ' : 'h-fit'} `}
+      ${data?.length > 2 ? 'md:h-[420px] h-[400px]   ' : 'h-fit'} `}
         >
           {newData?.length > 0 ? (
             newData?.map((item: any) => (

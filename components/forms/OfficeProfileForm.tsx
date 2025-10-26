@@ -120,7 +120,7 @@ export default function OfficeProfileForm({
             <SubmitButton
               title="Update office profile"
               isLoading={isLoading}
-              loadingTitle="Updating please wait..."
+              loadingTitle="Updating ..."
             />
           </div>
         )}

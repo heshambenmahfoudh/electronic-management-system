@@ -99,8 +99,8 @@ export default function AcadimecDepartmentForm({
             isLoading={isLoading}
             loadingTitle={
               isUpdate
-                ? 'Updating department please wait...'
-                : 'Saving department please wait...'
+                ? 'Updating department ...'
+                : 'Saving department ...'
             }
           />
           <ButtonClose hrefUrl="/dashboard/human-resources/acadimic-departments" />

@@ -104,8 +104,8 @@ export default function TypeMessageForm({
             isLoading={isLoading}
             loadingTitle={
               isUpdate
-                ? 'Updating type message please wait...'
-                : 'Saving type message please wait...'
+                ? 'Updating ...'
+                : 'Saving ...'
             }
           />
           <ButtonClose hrefUrl="/dashboard/sent-messages/type-messages" />

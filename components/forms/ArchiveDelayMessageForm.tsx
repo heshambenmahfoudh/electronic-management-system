@@ -178,7 +178,7 @@ export default function ArchiveDelayMessageForm({
             <SubmitButton
               title="Archive new message"
               isLoading={isLoading}
-              loadingTitle="Archived message please wait..."
+              loadingTitle="Archiving message ..."
             />
             <ButtonClose hrefUrl="/dashboard/recive-messages/delayed-messages" />
           </div>

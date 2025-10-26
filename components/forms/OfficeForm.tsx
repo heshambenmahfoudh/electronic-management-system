@@ -136,7 +136,7 @@ export default function OfficeForm({
             title={isUpdate ? 'Update office' : 'Save new office'}
             isLoading={isLoading}
             loadingTitle={
-              isUpdate ? 'Updating please wait...' : 'Saving please wait...'
+              isUpdate ? 'Updating office ...' : 'Saving office ...'
             }
           />
           <ButtonClose hrefUrl="/dashboard/offices" />

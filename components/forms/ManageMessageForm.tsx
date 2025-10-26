@@ -193,7 +193,7 @@ export default function ManageMessageForm() {
           <SubmitButton
             title="Send new message"
             isLoading={isLoading}
-            loadingTitle="Sending message please wait..."
+            loadingTitle="Sending message ..."
           />
           <ButtonClose hrefUrl="/dashboard/sent-messages/management-messages" />
         </div>

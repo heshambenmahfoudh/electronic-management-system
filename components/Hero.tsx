@@ -18,7 +18,6 @@ export default function Hero() {
           className="py-4 flex md:space-x-4 gap-2.5 items-center 
         flex-wrap  justify-center"
         >
-          <>
             <ThemeLink
               className="bg-rose-600 hover:bg-rose-700 focus:ring-rose-300
                text-white"
@@ -30,13 +29,12 @@ export default function Hero() {
               title="Access Your Account"
               href="/dashboard/settings/user-profile/update"
             />
-          </>
         </div>
       </div>
       <div className="md:w-[90%] md:h-[80%] opacity-75
        w-[90%] h-[90%] mx-auto rounded-xl">
         <img
-          src="/images/preview.png"
+          src="/images/previewPage.png"
           className="w-full h-full
          rounded-xl object-cover object-center mx-auto"
           alt="previwDashboard"

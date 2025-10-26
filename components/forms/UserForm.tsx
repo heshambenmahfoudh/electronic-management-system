@@ -155,7 +155,7 @@ export default function UserForm({
             title={isUpdate ? 'Update user' : 'Save new user'}
             isLoading={isLoading}
             loadingTitle={
-              isUpdate ? 'Updating please wait...' : 'Saving please wait...'
+              isUpdate ? 'Updating user ...' : 'Saving user ...'
             }
           />
           <ButtonClose hrefUrl="/dashboard/users" />

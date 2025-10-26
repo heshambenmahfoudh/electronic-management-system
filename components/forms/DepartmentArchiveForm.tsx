@@ -53,7 +53,7 @@ export default function DepartmentArchiveForm({
           toast.error(updated?.error)
         }
       } catch (error) {
-      setIsLoading(false)
+        setIsLoading(false)
       }
     } else {
       try {
@@ -96,16 +96,10 @@ export default function DepartmentArchiveForm({
         </div>
         <div className="mt-8 flex justify-between gap-4 items-center">
           <SubmitButton
-            title={
-              isUpdate
-                ? 'Update department archive'
-                : 'Save new department archive'
-            }
+            title={isUpdate ? 'Update department ' : 'Save new department '}
             isLoading={isLoading}
             loadingTitle={
-              isUpdate
-                ? 'Updating department archive please wait...'
-                : 'Saving department archive please wait...'
+              isUpdate ? 'Updating department ...' : 'Saving department ...'
             }
           />
           <ButtonClose hrefUrl="/dashboard/archive/archive-department" />

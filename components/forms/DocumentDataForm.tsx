@@ -105,7 +105,7 @@ export default function DocumentDataForm({
             <SubmitButton
               title="Update document data"
               isLoading={isLoading}
-              loadingTitle="Updating please wait..."
+              loadingTitle="Updating document ..."
             />
           </div>
         )}

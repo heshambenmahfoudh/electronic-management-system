@@ -185,7 +185,7 @@ export default function ArchiveSentMessageForm({
             <SubmitButton
               title="Archive new message"
               isLoading={isLoading}
-              loadingTitle="Archived message please wait..."
+              loadingTitle="Archiving message ..."
             />
             <ButtonClose hrefUrl="/dashboard/sent-messages/management-messages" />
           </div>

@@ -184,8 +184,8 @@ export default function DataTable({
         </table>
       ) : (
         <p
-          className="p-4 text-xl  bg-white text-center flex 
-          justify-center items-center flex-col
+          className="p-4   bg-white text-center flex 
+          justify-center items-center flex-col md:text-xl text-[16px]
           gap-5"
         >
           There is No Data to Display
@@ -193,8 +193,8 @@ export default function DataTable({
             <Link
               href={linkToCreate}
               className=" 
-              text-[16px] font-medium text-white  w-fit
-              py-2 px-5 rounded-md 
+              md:text-[14px] text-[13px] font-medium text-white  w-fit
+              py-2 md:px-5 px-3 rounded-md 
              bg-black/90 uppercase"
             >
               create new {titleToCreate}
